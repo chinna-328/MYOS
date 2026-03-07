@@ -1,0 +1,53 @@
+# ============================================
+#   BOCHS CONFIGURATION — bochsrc.txt
+# ============================================
+
+# ── ROM Files ──
+romimage: file=/usr/local/share/bochs/BIOS-bochs-latest, options=fastboot
+vgaromimage: file=/usr/local/share/bochs/VGABIOS-lgpl-latest
+
+# ── Memory ──
+memory: guest=128, host=128    # 128 MB RAM
+
+# ── CPU ──
+cpu: model=pentium_mmx, count=1, ips=100000000, reset_on_triple_fault=0
+
+# ── Boot Device ──
+# Option 1: Boot from floppy
+# floppya: 1_44=myos.img, status=inserted
+# boot: floppy
+
+# Option 2: Boot from CD-ROM (GRUB ISO)
+ata0-master: type=cdrom, path="build/myos.iso", status=inserted
+boot: cdrom
+
+# Option 3: Boot from hard disk
+# ata0-master: type=disk, path="disk.img", mode=flat
+# boot: disk
+
+# ── Display ──
+display_library: x, options="gui_debug"    # X11 with GUI debugger
+# For WSL2 or headless: display_library: sdl2
+
+# ── Serial Port (for debug output) ──
+com1: enabled=1, mode=file, dev=serial.log
+
+# ── Clock ──
+clock: sync=realtime, time0=local
+
+# ── Logging ──
+log: bochsout.log
+panic: action=ask
+error: action=report
+info: action=report
+debug: action=ignore
+
+# ── Magic Breakpoint ──
+# When your code executes "xchg bx, bx", Bochs will break
+magic_break: enabled=1
+
+# ── Mouse ──
+mouse: enabled=0
+
+# ── Keyboard ──
+keyboard: type=mf, serial_delay=250, paste_delay=100000

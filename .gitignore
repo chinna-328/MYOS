@@ -1,0 +1,13 @@
+# Build output
+/build
+
+# Bochs output
+bochsout.log
+
+# Editor files
+.vscode/
+nano.*.save
+
+# Object files
+*.o
+*.bin
